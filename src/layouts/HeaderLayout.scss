@@ -1,0 +1,24 @@
+.tabs {
+  display: inline-block;
+  border-bottom: 2px solid rgb(168, 168, 168);
+  width: -moz-available;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+.user {
+  display: inline;
+  margin-left: auto;
+  padding-top: 0.25rem;
+  float: right;
+}
+.log-out {
+  display: inline;
+  padding-top: 0.25rem;
+  &:hover {
+    cursor: pointer;
+    color: rgb(112, 112, 112);
+    font-weight: 500;
+  }
+  margin-left: auto;
+  float: right;
+}

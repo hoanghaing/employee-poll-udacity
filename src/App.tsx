@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css'
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import BlankLayout from '@/layouts/BlankLayout';
 import HeaderLayout from '@/layouts/HeaderLayout';
 import DashBoard from '@/pages/DashBoard/DashBoard';
@@ -9,6 +9,23 @@ import Leaderboard from '@/pages/Leaderboard/Leaderboard';
 import NewPoll from '@/pages/NewPoll/NewPoll';
 import NotFound from '@/pages/NotFound/NotFound';
 function App() {
+  const [loading, setLoading] = useState(true);
+  const [authenticated, setAuthenticated] = useState("");
+  useEffect(() => {
+    const loggedUser = localStorage.getItem("authenticated");
+    if (loggedUser) {
+      setAuthenticated(loggedUser);
+    }
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+  if (loading) {
+    return <span className="loading loading-dots loading-lg"></span>;
+  }
+  if (!authenticated) {
+    return <Navigate replace to="/login" />;
+  }
   return (
     <BrowserRouter>
       <Routes>
@@ -25,14 +42,6 @@ function App() {
             <HeaderLayout>
               <DashBoard />
             </HeaderLayout>
-          }
-        >
-        </Route>
-        <Route path="/login"
-          element={
-            <BlankLayout>
-              <Login />
-            </BlankLayout>
           }
         >
         </Route>
@@ -53,6 +62,13 @@ function App() {
         >
         </Route>
         <Route element={<BlankLayout><NotFound /></BlankLayout>}></Route>
+        <Route path="/login"
+          element={
+            <BlankLayout>
+              <Login />
+            </BlankLayout>
+          }
+        ></Route>
       </Routes>
     </BrowserRouter >
   )

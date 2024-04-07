@@ -1,20 +1,60 @@
 import React, { useState, useEffect } from 'react';
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from '@/pages/Home/Home';
+import BlankLayout from '@/layouts/BlankLayout';
+import HeaderLayout from '@/layouts/HeaderLayout';
+import DashBoard from '@/pages/DashBoard/DashBoard';
 import Login from '@/pages/Login/Login';
-import About from '@/pages/About/About';
+import Leaderboard from '@/pages/Leaderboard/Leaderboard';
+import NewPoll from '@/pages/NewPoll/NewPoll';
 import NotFound from '@/pages/NotFound/NotFound';
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/about" element={<About />}></Route>
-        <Route element={<NotFound />}></Route>
+        <Route path="/"
+          element={
+            <HeaderLayout>
+              <DashBoard />
+            </HeaderLayout>
+          }
+        >
+        </Route>
+        <Route path="/home"
+          element={
+            <HeaderLayout>
+              <DashBoard />
+            </HeaderLayout>
+          }
+        >
+        </Route>
+        <Route path="/login"
+          element={
+            <BlankLayout>
+              <Login />
+            </BlankLayout>
+          }
+        >
+        </Route>
+        <Route path="/leaderboard"
+          element={
+            <HeaderLayout>
+              <Leaderboard />
+            </HeaderLayout>
+          }
+        >
+        </Route>
+        <Route path="/new"
+          element={
+            <HeaderLayout>
+              <NewPoll />
+            </HeaderLayout>
+          }
+        >
+        </Route>
+        <Route element={<BlankLayout><NotFound /></BlankLayout>}></Route>
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter >
   )
 }
 

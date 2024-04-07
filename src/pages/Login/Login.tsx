@@ -23,7 +23,6 @@ const Login = () => {
     }
     const result = api.validateUser(payload);
     if (result) {
-      console.log("true true true");
       localStorage.setItem("authenticated", payload.id);
       return navigate("/");
     }

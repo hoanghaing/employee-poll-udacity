@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './App.css'
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import BlankLayout from '@/layouts/BlankLayout';
 import HeaderLayout from '@/layouts/HeaderLayout';
 import DashBoard from '@/pages/DashBoard/DashBoard';
@@ -8,23 +8,27 @@ import Login from '@/pages/Login/Login';
 import Leaderboard from '@/pages/Leaderboard/Leaderboard';
 import NewPoll from '@/pages/NewPoll/NewPoll';
 import NotFound from '@/pages/NotFound/NotFound';
-function App() {
+const App = () => {
   const [loading, setLoading] = useState(true);
-  const [authenticated, setAuthenticated] = useState("");
-  useEffect(() => {
+  const authenticatedHandling = () => {
+    setLoading(false);
     const loggedUser = localStorage.getItem("authenticated");
-    if (loggedUser) {
-      setAuthenticated(loggedUser);
+    if (!loggedUser) {
+      const isInLoginRoute = window.location.href.includes('/login');
+      if (isInLoginRoute) return;
+      else {
+        window.location.href = '/login';
+      }
     }
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, []);
-  if (loading) {
-    return <span className="loading loading-dots loading-lg"></span>;
   }
-  if (!authenticated) {
-    return <Navigate replace to="/login" />;
+  useEffect(() => {
+    setTimeout(() => {
+      authenticatedHandling();
+    }, 1000);
+  }, []);
+
+  if (loading) {
+    return <span className="absolute top-1/2 left-1/2 loading loading-dots loading-lg"></span>;
   }
   return (
     <BrowserRouter>
@@ -70,7 +74,7 @@ function App() {
           }
         ></Route>
       </Routes>
-    </BrowserRouter >
+    </BrowserRouter>
   )
 }
 

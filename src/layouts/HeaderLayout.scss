@@ -4,21 +4,31 @@
   width: -moz-available;
   margin-left: 2rem;
   margin-right: 2rem;
+  .tab {
+    margin-top: 0.5rem;
+  }
 }
 .user {
-  display: inline;
-  margin-left: auto;
-  padding-top: 0.25rem;
+  display: flex;
+  margin: 0.5rem auto;
   float: right;
+  align-items: center;
+  .avt {
+    width: 2rem;
+    margin-right: 0.5rem;
+  }
+  .name {
+    font-weight: 600;
+  }
 }
 .log-out {
   display: inline;
-  padding-top: 0.25rem;
+  margin-left: 1rem;
+  margin-top: 0.65rem;
   &:hover {
     cursor: pointer;
     color: rgb(112, 112, 112);
     font-weight: 500;
   }
-  margin-left: auto;
   float: right;
 }

@@ -11,9 +11,24 @@ const HeaderLayout = ({ children }) => {
     <div>
       <header>
         <div role="tablist" className="tabs">
-          <a role="tab" className="tab" href='/home'>Home</a>
-          <a role="tab" className="tab" href='/leaderboard'>Leaderboard</a>
-          <a role="tab" className="tab" href='/new'>New</a>
+          <a
+            role="tab"
+            className={window.location.href.includes('/home') ? 'tab active' : 'tab' }
+            href='/home'>
+              Home
+          </a>
+          <a
+            role="tab"
+            className={window.location.href.includes('/leaderboard') ? 'tab active' : 'tab' }
+            href='/leaderboard'>
+              Leaderboard
+          </a>
+          <a
+            role="tab"
+            className={window.location.href.includes('/new') ? 'tab active' : 'tab' }
+            href='/new'>
+              New
+          </a>
           <div className='log-out' onClick={onClickLogout}>
             Logout
           </div>
@@ -21,7 +36,6 @@ const HeaderLayout = ({ children }) => {
             <img className='avt' src='./src/assets/avatar/mtsamis.jpg'/>
             <span className='name'>Ahihi</span>
           </div>
-
         </div>
       </header>
       {children}

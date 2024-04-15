@@ -7,6 +7,7 @@ import DashBoard from '@/pages/DashBoard/DashBoard';
 import Login from '@/pages/Login/Login';
 import Leaderboard from '@/pages/Leaderboard/Leaderboard';
 import NewPoll from '@/pages/NewPoll/NewPoll';
+import PollDetail from '@/pages/PollDetail/PollDetail';
 import NotFound from '@/pages/NotFound/NotFound';
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -65,6 +66,9 @@ const App = () => {
           }
         >
         </Route>
+        <Route path="questions/:question_id" element={<HeaderLayout>
+          <PollDetail />
+        </HeaderLayout>} />
         <Route element={<BlankLayout><NotFound /></BlankLayout>}></Route>
         <Route path="/login"
           element={

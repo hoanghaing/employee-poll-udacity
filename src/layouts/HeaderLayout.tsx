@@ -33,7 +33,7 @@ const HeaderLayout = ({ children }) => {
             Logout
           </div>
           <div className='user'>
-            <img className='avt' src='./src/assets/avatar/mtsamis.jpg'/>
+            <img className='avt' src='../src/assets/avatar/hainh.jpg'/>
             <span className='name'>Ahihi</span>
           </div>
         </div>

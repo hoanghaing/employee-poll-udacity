@@ -44,7 +44,20 @@ let users = {
       "xj352vofupe1dqz9emx13r": 'optionOne',
     },
     questions: [],
-  }
+  },
+  hainh: {
+    id: 'hainh',
+    password:'123456',
+    name: 'Hai Nguuyen Hoang',
+    avatarURL: '/assets/avatar/sarahedo.jpg',
+    answers: {
+      "8xf0y6ziyjabvozdd253nd": 'optionOne',
+      "6ni6ok3ym7mf1p33lnez": 'optionOne',
+      "am8ehyc8byjqgar0jgpub9": 'optionTwo',
+      "loxhs1bqm25b708cmbf3g": 'optionTwo'
+    },
+    questions: ['8xf0y6ziyjabvozdd253nd', 'am8ehyc8byjqgar0jgpub9']
+  },
 }
 
 let questions = {

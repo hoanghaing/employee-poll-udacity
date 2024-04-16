@@ -1,7 +1,7 @@
 let users = {
   sarahedo: {
     id: 'sarahedo',
-    password:'password123',
+    password: 'password123',
     name: 'Sarah Edo',
     avatarURL: '/assets/avatar/sarahedo.jpg',
     answers: {
@@ -14,7 +14,7 @@ let users = {
   },
   tylermcginnis: {
     id: 'tylermcginnis',
-    password:'abc321',
+    password: 'abc321',
     name: 'Tyler McGinnis',
     avatarURL: '/assets/avatar/tylermcginnis.jpg',
     answers: {
@@ -25,7 +25,7 @@ let users = {
   },
   mtsamis: {
     id: 'mtsamis',
-    password:'xyz123',
+    password: 'xyz123',
     name: 'Mike Tsamis',
     avatarURL: '/assets/avatar/mtsamis.jpg',
     answers: {
@@ -37,7 +37,7 @@ let users = {
   },
   zoshikanlu: {
     id: 'zoshikanlu',
-    password:'pass246',
+    password: 'pass246',
     name: 'Zenobia Oshikanlu',
     avatarURL: '/assets/avatar/zoshikanlu.jpg',
     answers: {
@@ -47,7 +47,7 @@ let users = {
   },
   hainh: {
     id: 'hainh',
-    password:'123456',
+    password: '123456',
     name: 'Hai Nguuyen Hoang',
     avatarURL: '/assets/avatar/sarahedo.jpg',
     answers: {
@@ -141,13 +141,13 @@ let questions = {
   },
 }
 
-function generateUID () {
+function generateUID() {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 }
 
-export function _getUsers () {
+export function _getUsers() {
   return new Promise((resolve) => {
-    setTimeout(() => resolve({...users}), 1000)
+    setTimeout(() => resolve({ ...users }), 1000)
   })
 }
 export function validateUser(payload) {
@@ -157,13 +157,13 @@ export function validateUser(payload) {
   return false;
 }
 // export function 
-export function _getQuestions () {
+export function _getQuestions() {
   return new Promise((resolve) => {
-    setTimeout(() => resolve({...questions}), 1000)
+    setTimeout(() => resolve({ ...questions }), 1000)
   })
 }
 
-function formatQuestion ({ optionOneText, optionTwoText, author }) {
+function formatQuestion({ optionOneText, optionTwoText, author }) {
   return {
     id: generateUID(),
     timestamp: Date.now(),
@@ -179,7 +179,7 @@ function formatQuestion ({ optionOneText, optionTwoText, author }) {
   }
 }
 
-export function _saveQuestion (question) {
+export function _saveQuestion(question) {
   return new Promise((resolve, reject) => {
     if (!question.optionOneText || !question.optionTwoText || !question.author) {
       reject("Please provide optionOneText, optionTwoText, and author");
@@ -197,7 +197,7 @@ export function _saveQuestion (question) {
   })
 }
 
-export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
+export function _saveQuestionAnswer({ authedUser, qid, answer }) {
   return new Promise((resolve, reject) => {
     if (!authedUser || !qid || !answer) {
       reject("Please provide authedUser, qid, and answer");
@@ -231,6 +231,43 @@ export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
   })
 }
 
-export function _getRanking () {
-  
+export function _getRanking() {
+
+}
+
+function formatTimestamp(timestamp) {
+  const date = new Date(timestamp);
+  const hours = date.getHours();
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  const formattedHours = (hours % 12 || 12).toString().padStart(2, '0');
+  const formattedDate = `${formattedHours}:${minutes} ${ampm} | ${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+  return formattedDate;
+}
+
+export function getQuestionLists(userId: string) {
+  const user = users[userId];
+  const userAnsweredQuestions = Object.keys(user.answers);
+
+  const doneQuestions = userAnsweredQuestions.map(questionId => {
+    const { id, author, timestamp } = questions[questionId];
+    return {
+      id,
+      author,
+      timestamp: formatTimestamp(timestamp)
+    };
+  });
+
+  const newQuestions = Object.values(questions)
+    .filter(question => !userAnsweredQuestions.includes(question.id))
+    .map(({ id, author, timestamp }) => ({
+      id,
+      author,
+      timestamp: formatTimestamp(timestamp)
+    }));
+
+  return {
+    doneQuestions,
+    newQuestions,
+  };
 }

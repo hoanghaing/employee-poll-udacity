@@ -3,7 +3,11 @@ import './Login.scss';
 import * as api from '@/api/index';
 import { useNavigate } from "react-router-dom";
 
+import { useDispatch } from 'react-redux';
+import { setUser } from '@/stores/user';
+
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,6 +27,10 @@ const Login = () => {
     }
     const result = api.validateUser(payload);
     if (result) {
+      const userData = {
+        id: usernameInput.value
+      }
+      dispatch(setUser(userData))
       localStorage.setItem("authenticated", payload.id);
       return navigate("/");
     }

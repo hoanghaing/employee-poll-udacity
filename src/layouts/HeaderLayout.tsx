@@ -1,10 +1,15 @@
 import React from 'react';
 import './HeaderLayout.scss';
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { clearUser } from '@/stores/user';
+
 const HeaderLayout = ({ children }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const onClickLogout = () => {
     localStorage.removeItem("authenticated");
+    dispatch(clearUser())
     return navigate("/login");
   }
   return (

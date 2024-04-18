@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './PollDetail.scss';
 const PollDetail = () => {
+  const [author, setAuthor] = useState([]);
+  const [options, setOption] = useState([]);
+
   return (<div className='poll-container'>
     <div className='poll-author'>
-      Poll by sarahedo
+      Poll by {author}
     </div>
     <div className='poll-avatar'>
       <img className='avt' src='../src/assets/avatar/hainh.jpg' />

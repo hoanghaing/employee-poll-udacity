@@ -49,14 +49,13 @@ let users = {
     id: 'hainh',
     password: '123456',
     name: 'Hai Nguuyen Hoang',
-    avatarURL: '/assets/avatar/sarahedo.jpg',
+    avatarURL: '/assets/avatar/hainh.jpg',
     answers: {
       "8xf0y6ziyjabvozdd253nd": 'optionOne',
-      "6ni6ok3ym7mf1p33lnez": 'optionOne',
       "am8ehyc8byjqgar0jgpub9": 'optionTwo',
       "loxhs1bqm25b708cmbf3g": 'optionTwo'
     },
-    questions: ['8xf0y6ziyjabvozdd253nd', 'am8ehyc8byjqgar0jgpub9']
+    questions: []
   },
 }
 
@@ -230,9 +229,38 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
     }, 500)
   })
 }
+interface UserStat {
+  id: string;
+  name: string;
+  avatarURL: string;
+  created: number;
+  answered: number;
+}
+export function _getRanking(): UserStat[] {
+  const userStats: UserStat[] = [];
 
-export function _getRanking() {
+  // Count questions created and answered by each user
+  for (const userId in users) {
+    const { id, name, avatarURL, questions: userQuestions, answers } = users[userId];
+    const created = userQuestions.length;
+    let answered = 0;
+    for (const questionId in answers) {
+      if (questions[questionId]) { // Check if the question exists
+        answered++;
+      }
+    }
+    userStats.push({ id, name, avatarURL, created, answered });
+  }
 
+  // Sort users by answered count (descending), then by created count (descending)
+  userStats.sort((a, b) => {
+    if (a.answered !== b.answered) {
+      return b.answered - a.answered; // Sort by answered count
+    }
+    return b.created - a.created; // If answered counts are equal, sort by created count
+  });
+
+  return userStats;
 }
 
 function formatTimestamp(timestamp) {

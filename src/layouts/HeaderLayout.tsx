@@ -20,24 +20,24 @@ const HeaderLayout = ({ children }) => {
     <div>
       <header>
         <div role="tablist" className="tabs">
-          <a
+          <span
             role="tab"
             className={window.location.href.includes('/home') ? 'tab active' : 'tab'}
           >
             <Link to="/home">Home</Link>
-          </a>
-          <a
+          </span>
+          <span
             role="tab"
             className={window.location.href.includes('/leaderboard') ? 'tab active' : 'tab'}
           >
             <Link to="/leaderboard">Leaderboard</Link>
-          </a>
-          <a
+          </span>
+          <span
             role="tab"
             className={window.location.href.includes('/new') ? 'tab active' : 'tab'}
           >
             <Link to="/new">New</Link>
-          </a>
+          </span>
           <div className='log-out' onClick={onClickLogout}>
             Logout
           </div>

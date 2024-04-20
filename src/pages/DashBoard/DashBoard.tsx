@@ -13,8 +13,8 @@ const DashBoard = () => {
   }, [])
   return (
     <div className="container">
-      <Panel title="New Questions" questions={doneQues} />
-      <Panel title="Done" questions={newQues} />
+      <Panel title="New Questions" questions={newQues} />
+      <Panel title="Done" questions={doneQues} />
     </div>
   );
 }

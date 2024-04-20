@@ -19,7 +19,7 @@ const PollDetail = () => {
     setAuthor(author);
     setIsAnswered(answered);
     setOptions(options);
-  }, [])
+  }, [question_id]);
   return (<div className='poll-container'>
     <div className='poll-author'>
       Poll by {author}

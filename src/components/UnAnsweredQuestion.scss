@@ -1,0 +1,29 @@
+.unanswer-question {
+  width: 25rem;
+  height: 6.5rem;
+  border: 1px solid #c7c7c7;
+  border-radius: 8px;
+  .question-text {
+    height: 4rem;
+    padding: 0.5rem;
+  }
+  .action {
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+      min-height: unset !important;
+      height: 2rem;
+      width: 24rem;
+      min-width: unset;
+    }
+  }
+}
+
+.poll-content--options {
+  display: flex;
+  flex-direction: revert;
+  gap: 1rem;
+}

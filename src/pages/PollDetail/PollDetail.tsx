@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './PollDetail.scss';
 import * as api from '@/api/index';
+import AnsweredQuestion from '@/components/AnsweredQuestion';
+import UnAnsweredQuestion from '@/components/UnAnsweredQuestion';
 const PollDetail = () => {
   const { question_id } = useParams();
   const [author, setAuthor] = useState([]);
@@ -15,8 +17,9 @@ const PollDetail = () => {
     const result = api.getQuestionDetail(question_id, userId);
     const { answered, author, options } = result;
     setAuthor(author);
-    setIsAnswered(answered)
-  },[])
+    setIsAnswered(answered);
+    setOptions(options);
+  }, [])
   return (<div className='poll-container'>
     <div className='poll-author'>
       Poll by {author}
@@ -29,13 +32,24 @@ const PollDetail = () => {
         <div className='poll-content--title'>
           Would you rather
         </div>
-        <div className='poll-content--options'>
+        {
+          isAnswered ?
+            (
+              <div className='poll-content-answered'>
+                <AnsweredQuestion />
+              </div>
+            ) :
+            (
+              <div className='poll-content--options'>
+                {options.map((item, index) => (
+                  <UnAnsweredQuestion key={index} option={item} />
+                ))}
+              </div>
+            )
+        }
 
-        </div>
       </div>
-      <div className='poll-content-answered'>
 
-      </div>
     </div>
   </div>)
 }

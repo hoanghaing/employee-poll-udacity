@@ -158,7 +158,7 @@ export function validateUser(payload) {
     };
   }
   if (users[id] && users[id].password === password) {
-    const {avatarURL, name} = users[id]
+    const { avatarURL, name } = users[id]
     return {
       user: {
         avatarURL,
@@ -330,19 +330,31 @@ export function getQuestionDetail(id, userId) {
     const optionOnePercentage = totalVotes === 0 ? 0 : (question.optionOne.votes.length / totalVotes) * 100;
     const optionTwoPercentage = totalVotes === 0 ? 0 : (question.optionTwo.votes.length / totalVotes) * 100;
     return {
-      options: {
-        optionOne: optionOnePercentage,
-        optionTwo: optionTwoPercentage
-      },
+      options: [
+        {
+          text: question.optionOne.text,
+          percentage: optionOnePercentage
+        },
+        {
+          text: question.optionTwo.text,
+          percentage: optionTwoPercentage
+        }
+      ],
       answered: userVoted,
       author,
     };
   }
   return {
-    options: {
-      optionOne: question.optionOne.text,
-      optionTwo: question.optionTwo.text
-    },
+    options: [
+      {
+        text: question.optionOne.text,
+        value: 0,
+      },
+      {
+        text: question.optionTwo.text,
+        value: 1
+      }
+    ],
     answered: userVoted,
     author,
   };

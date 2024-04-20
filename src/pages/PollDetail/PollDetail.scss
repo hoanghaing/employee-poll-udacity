@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   .poll-author {
     font-size: 20px;
     font-weight: 700;
@@ -12,6 +13,7 @@
     width: 250px;
     margin-top: 1rem;
     margin-bottom: 1rem;
+
     .avt {}
   }
 
@@ -20,6 +22,8 @@
       .poll-content--title {
         font-size: 20px;
         font-weight: 700;
+        text-align: center;
+        margin-bottom: 1rem;
       }
 
       .poll-content--options {}

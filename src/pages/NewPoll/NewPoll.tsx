@@ -1,10 +1,23 @@
 import React, { useState } from 'react';
 import './NewPoll.scss';
+import * as api from '@/api/index';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 const NewPoll = () => {
+  const navigate = useNavigate();
   const [option1, setOption1] = useState("");
   const [option2, setOption2] = useState("");
-  const onSubmitQuestion = () => {
-    console.log('onSubmitQuestion');
+  const authorId = useSelector((state: any) => {
+    return state.user.name
+  });
+  const onSubmitQuestion = async () => {
+    const payload = {
+      optionOneText: option1,
+      optionTwoText: option2,
+      author: authorId
+    }
+    const result = await api._saveQuestion(payload);
+    if (result.timestamp) navigate('/home');
   }
   const onChangeOption1 = (event) => {
     setOption1(event.target.value)

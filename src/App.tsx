@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser } from '@/stores/user';
 import BlankLayout from '@/layouts/BlankLayout';
 import HeaderLayout from '@/layouts/HeaderLayout';
 import DashBoard from '@/pages/DashBoard/DashBoard';
@@ -11,6 +13,15 @@ import PollDetail from '@/pages/PollDetail/PollDetail';
 import NotFound from '@/pages/NotFound/NotFound';
 const App = () => {
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const [user, setCurrentUser] = useState(() => {
+    const storedUser = localStorage.getItem('cachedUser');
+    return storedUser ? JSON.parse(storedUser) : { avatarURL: "", id: "", name: "" };
+  });
+  useEffect(() => {
+    localStorage.setItem('cachedUser', JSON.stringify(user));
+    dispatch(setUser(user))
+  }, [user]);
   const authenticatedHandling = () => {
     setLoading(false);
     const loggedUser = localStorage.getItem("authenticated");

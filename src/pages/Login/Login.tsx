@@ -28,7 +28,8 @@ const Login = () => {
     const result = api.validateUser(payload);
     if (result.success) {
       const { user } = result
-      dispatch(setUser(user))
+      dispatch(setUser(user));
+      localStorage.setItem('cachedUser', JSON.stringify(user));
       localStorage.setItem("authenticated", payload.id);
       return navigate("/");
     } else {

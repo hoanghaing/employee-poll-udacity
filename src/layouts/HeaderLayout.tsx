@@ -12,6 +12,7 @@ const HeaderLayout = ({ children }) => {
   const navigate = useNavigate();
   const onClickLogout = () => {
     localStorage.removeItem("authenticated");
+    localStorage.removeItem("cachedUser");
     dispatch(clearUser())
     return navigate("/login");
   }

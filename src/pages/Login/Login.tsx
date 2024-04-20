@@ -4,7 +4,7 @@ import * as api from '@/api/index';
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from 'react-redux';
-import { setUser } from '@/stores/user';
+import { setUser, clearUser } from '@/stores/user';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -26,13 +26,14 @@ const Login = () => {
       password: passwordInput.value
     }
     const result = api.validateUser(payload);
-    if (result) {
-      const userData = {
-        id: usernameInput.value
-      }
-      dispatch(setUser(userData))
+    if (result.success) {
+      const { user } = result
+      dispatch(setUser(user))
       localStorage.setItem("authenticated", payload.id);
       return navigate("/");
+    } else {
+      dispatch(clearUser())
+      return;
     }
   };
   return (<div className="container flex flex-col gap-[12px]">

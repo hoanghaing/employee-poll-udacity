@@ -48,7 +48,7 @@ let users = {
   hainh: {
     id: 'hainh',
     password: '123456',
-    name: 'Hai Nguuyen Hoang',
+    name: 'Hai Nguyen Hoang',
     avatarURL: '/assets/avatar/hainh.jpg',
     answers: {
       "8xf0y6ziyjabvozdd253nd": 'optionOne',
@@ -151,9 +151,27 @@ export function _getUsers() {
 }
 export function validateUser(payload) {
   const { id, password } = payload;
-  if (!users[id]) return false;
-  if (users[id] && users[id].password === password) return true;
-  return false;
+  if (!users[id]) {
+    return {
+      user: null,
+      success: false
+    };
+  }
+  if (users[id] && users[id].password === password) {
+    const {avatarURL, name} = users[id]
+    return {
+      user: {
+        avatarURL,
+        id,
+        name
+      },
+      success: true
+    }
+  }
+  return {
+    user: null,
+    success: false
+  };
 }
 // export function 
 export function _getQuestions() {

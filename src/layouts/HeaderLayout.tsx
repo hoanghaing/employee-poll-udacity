@@ -6,6 +6,9 @@ import { clearUser } from '@/stores/user';
 
 const HeaderLayout = ({ children }) => {
   const dispatch = useDispatch();
+  const currentUser = useSelector((state: any) => {
+    return state.user
+  });
   const navigate = useNavigate();
   const onClickLogout = () => {
     localStorage.removeItem("authenticated");
@@ -18,28 +21,28 @@ const HeaderLayout = ({ children }) => {
         <div role="tablist" className="tabs">
           <a
             role="tab"
-            className={window.location.href.includes('/home') ? 'tab active' : 'tab' }
+            className={window.location.href.includes('/home') ? 'tab active' : 'tab'}
             href='/home'>
-              Home
+            Home
           </a>
           <a
             role="tab"
-            className={window.location.href.includes('/leaderboard') ? 'tab active' : 'tab' }
+            className={window.location.href.includes('/leaderboard') ? 'tab active' : 'tab'}
             href='/leaderboard'>
-              Leaderboard
+            Leaderboard
           </a>
           <a
             role="tab"
-            className={window.location.href.includes('/new') ? 'tab active' : 'tab' }
+            className={window.location.href.includes('/new') ? 'tab active' : 'tab'}
             href='/new'>
-              New
+            New
           </a>
           <div className='log-out' onClick={onClickLogout}>
             Logout
           </div>
           <div className='user'>
-            <img className='avt' src='../src/assets/avatar/hainh.jpg'/>
-            <span className='name'>Ahihi</span>
+            <img className='avt' src={`../src/${currentUser.avatarURL}`} />
+            <span className='name'>{currentUser.name}</span>
           </div>
         </div>
       </header>

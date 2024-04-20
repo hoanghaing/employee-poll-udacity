@@ -29,6 +29,10 @@
       .poll-content--options {}
     }
 
-    .poll-content-answered {}
+    .poll-content-answered {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+    }
   }
 }

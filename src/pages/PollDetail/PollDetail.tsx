@@ -36,7 +36,9 @@ const PollDetail = () => {
           isAnswered ?
             (
               <div className='poll-content-answered'>
-                <AnsweredQuestion />
+                {options.map((item, index) => (
+                  <AnsweredQuestion key={index} option={item} question_id={question_id}/>
+                ))}
               </div>
             ) :
             (

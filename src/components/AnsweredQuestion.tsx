@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './AnsweredQuestion.scss';
-const AnsweredQuestion = ({}) => {
+const AnsweredQuestion = ({ option }) => {
   return (
-    <div className='question'>
-      <div className='info'>
-        <p className='username'></p>
-        <p className='time'></p>
+    <div className={`answer-question ${option.isVotedByYou ? 'selected' : ''}`}>
+      <div className={`info ${option.isVotedByYou ? 'selected' : ''}`}>
+        {option.text}
       </div>
-      <div className='action'>
-        <button className="btn btn-outline btn-success" onClick={() => {}}></button>
+      <div className='stats'>
+        <div>
+          {`${option.votes} votes | ${(option.percentage).toFixed(1)}%`}
+        </div>
       </div>
     </div>
   );

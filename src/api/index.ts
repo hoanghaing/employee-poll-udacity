@@ -324,16 +324,22 @@ export function getQuestionDetail(id, userId) {
   if (userVoted) {
     const totalVotes = question.optionOne.votes.length + question.optionTwo.votes.length;
     const optionOnePercentage = totalVotes === 0 ? 0 : (question.optionOne.votes.length / totalVotes) * 100;
+    const optionOneTotalVotes = question.optionOne.votes.length;
     const optionTwoPercentage = totalVotes === 0 ? 0 : (question.optionTwo.votes.length / totalVotes) * 100;
+    const optionTwoTotalVotes = question.optionTwo.votes.length;
     return {
       options: [
         {
           text: question.optionOne.text,
-          percentage: optionOnePercentage
+          percentage: optionOnePercentage,
+          votes: optionOneTotalVotes,
+          isVotedByYou: userId && question.optionOne.votes.includes(userId)
         },
         {
           text: question.optionTwo.text,
-          percentage: optionTwoPercentage
+          percentage: optionTwoPercentage,
+          votes: optionTwoTotalVotes,
+          isVotedByYou: userId && question.optionTwo.votes.includes(userId)
         }
       ],
       answered: true,

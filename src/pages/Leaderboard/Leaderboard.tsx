@@ -11,7 +11,7 @@ const Leaderboard = () => {
   }, []);
   for (const user of rankings) {
     itemsComponent.push(
-      <tr>
+      <tr key={user.id}>
         <td>
           <div className="flex items-center gap-3">
             <div className="avatar">

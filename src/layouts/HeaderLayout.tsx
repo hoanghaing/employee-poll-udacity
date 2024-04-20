@@ -1,6 +1,6 @@
 import React from 'react';
 import './HeaderLayout.scss';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { clearUser } from '@/stores/user';
 
@@ -22,20 +22,20 @@ const HeaderLayout = ({ children }) => {
           <a
             role="tab"
             className={window.location.href.includes('/home') ? 'tab active' : 'tab'}
-            href='/home'>
-            Home
+          >
+            <Link to="/home">Home</Link>
           </a>
           <a
             role="tab"
             className={window.location.href.includes('/leaderboard') ? 'tab active' : 'tab'}
-            href='/leaderboard'>
-            Leaderboard
+          >
+            <Link to="/leaderboard">Leaderboard</Link>
           </a>
           <a
             role="tab"
             className={window.location.href.includes('/new') ? 'tab active' : 'tab'}
-            href='/new'>
-            New
+          >
+            <Link to="/new">New</Link>
           </a>
           <div className='log-out' onClick={onClickLogout}>
             Logout

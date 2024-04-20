@@ -323,8 +323,8 @@ export function getQuestionDetail(id, userId) {
   if (!question) {
     throw new Error('Question not found');
   }
-
   const userVoted = userId && (question.optionOne.votes.includes(userId) || question.optionTwo.votes.includes(userId));
+  const author = userId && users[userId].name ? users[userId].name : "";
   if (userVoted) {
     const totalVotes = question.optionOne.votes.length + question.optionTwo.votes.length;
     const optionOnePercentage = totalVotes === 0 ? 0 : (question.optionOne.votes.length / totalVotes) * 100;
@@ -334,7 +334,8 @@ export function getQuestionDetail(id, userId) {
         optionOne: optionOnePercentage,
         optionTwo: optionTwoPercentage
       },
-      answered: userVoted
+      answered: userVoted,
+      author,
     };
   }
   return {
@@ -342,6 +343,7 @@ export function getQuestionDetail(id, userId) {
       optionOne: question.optionOne.text,
       optionTwo: question.optionTwo.text
     },
-    answered: userVoted
+    answered: userVoted,
+    author,
   };
 }

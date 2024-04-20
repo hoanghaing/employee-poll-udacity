@@ -344,11 +344,11 @@ export function getQuestionDetail(id, userId) {
     options: [
       {
         text: question.optionOne.text,
-        value: 0,
+        value: 'optionOne',
       },
       {
         text: question.optionTwo.text,
-        value: 1
+        value: 'optionTwo'
       }
     ],
     answered: false,

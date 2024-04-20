@@ -16,10 +16,13 @@ const Panel = ({ title, questions }) => {
   return (
     <div className='panel'>
       <div className='panel-header'>
-        <p>{ title }</p>
+        <p>{title}</p>
       </div>
       <div className='panel-body'>
-        {questionComponents}
+        {
+          questionComponents.length > 0 ? (
+            <>{questionComponents}</>) : (<><div className='text-center'>No question</div></>)
+        }
       </div>
     </div>
   );

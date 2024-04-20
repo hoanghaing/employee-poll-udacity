@@ -1,13 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './UnAnsweredQuestion.scss';
-const UnAnsweredQuestion = ({ option }) => {
+import * as api from '@/api/index';
+import { useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+const UnAnsweredQuestion = ({ option, question_id }) => {
+  const navigate = useNavigate();
+  const userId = useSelector((state: any) => {
+    return state.user.id
+  });
+  const handleVoting = async () => {
+    const payload = {
+      authedUser: userId,
+      qid: question_id,
+      answer: option.value,
+    }
+    const res = await api._saveQuestionAnswer(payload);
+    if (res) {
+      navigate('/home');
+    }
+  }
   return (
     <div className='unanswer-question'>
       <div className='question-text'>
         { option.text }
       </div>
       <div className='action'>
-        <button className="btn btn-outline btn-success" onClick={() => {}}>Vote</button>
+        <button className="btn btn-outline btn-success" onClick={handleVoting}>Vote</button>
       </div>
     </div>
   );

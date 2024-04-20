@@ -42,7 +42,7 @@ const PollDetail = () => {
             (
               <div className='poll-content--options'>
                 {options.map((item, index) => (
-                  <UnAnsweredQuestion key={index} option={item} />
+                  <UnAnsweredQuestion key={index} option={item} question_id={question_id} />
                 ))}
               </div>
             )

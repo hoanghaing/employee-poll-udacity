@@ -88,6 +88,13 @@ const App = () => {
             </BlankLayout>
           }
         ></Route>
+        <Route path="/notfound"
+          element={
+            <BlankLayout>
+              <NotFound />
+            </BlankLayout>
+          }
+        ></Route>
       </Routes>
     </BrowserRouter>
   )

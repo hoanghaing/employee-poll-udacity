@@ -297,7 +297,8 @@ export function getQuestionLists(userId: string) {
     return {
       id,
       author,
-      timestamp: formatTimestamp(timestamp)
+      timestamp: formatTimestamp(timestamp),
+      rawTimeStamp: timestamp,
     };
   });
 
@@ -306,8 +307,11 @@ export function getQuestionLists(userId: string) {
     .map(({ id, author, timestamp }) => ({
       id,
       author,
-      timestamp: formatTimestamp(timestamp)
+      timestamp: formatTimestamp(timestamp),
+      rawTimeStamp: timestamp,
     }));
+  doneQuestions.sort((a, b) => b.rawTimeStamp - a.rawTimeStamp);
+  newQuestions.sort((a, b) => b.rawTimeStamp - a.rawTimeStamp);
 
   return {
     doneQuestions,

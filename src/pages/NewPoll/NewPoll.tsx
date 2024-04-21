@@ -8,7 +8,7 @@ const NewPoll = () => {
   const [option1, setOption1] = useState("");
   const [option2, setOption2] = useState("");
   const authorId = useSelector((state: any) => {
-    return state.user.name
+    return state.user.id
   });
   const onSubmitQuestion = async () => {
     const payload = {

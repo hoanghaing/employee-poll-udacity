@@ -10,9 +10,9 @@ const NotFound = () => {
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
       </svg>
     </div>
-    <p className="mt-4 text-gray-600">Let's get you back <a href="/" className="text-blue-500">
-      <Link to="/">home</Link>
-    </a>.</p>
+    <p className="mt-4 text-gray-600">Let's get you back 
+      <Link to="/" className="text-blue-500"> home</Link>.
+    </p>
   </div>)
 }
 export default NotFound

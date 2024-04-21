@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './PollDetail.scss';
 import * as api from '@/api/index';
 import AnsweredQuestion from '@/components/AnsweredQuestion';
 import UnAnsweredQuestion from '@/components/UnAnsweredQuestion';
 const PollDetail = () => {
+  const navigate = useNavigate();
   const { question_id } = useParams();
   const [author, setAuthor] = useState([]);
   const [options, setOptions] = useState([]);
@@ -14,11 +15,15 @@ const PollDetail = () => {
     return state.user.id
   });
   useEffect(() => {
-    const result = api.getQuestionDetail(question_id, userId);
-    const { answered, author, options } = result;
-    setAuthor(author);
-    setIsAnswered(answered);
-    setOptions(options);
+    try {
+      const result = api.getQuestionDetail(question_id, userId);
+      const { answered, author, options } = result;
+      setAuthor(author);
+      setIsAnswered(answered);
+      setOptions(options);
+    } catch (err) {
+      navigate('/notfound');
+    }
   }, [question_id]);
   return (<div className='poll-container'>
     <div className='poll-author'>

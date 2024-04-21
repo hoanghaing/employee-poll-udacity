@@ -9,6 +9,6 @@ export default defineConfig({
     },
   },
   test: {
-    // ... Specify options here.
+    environment: 'happy-dom'
   },
 })

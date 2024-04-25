@@ -1,43 +1,36 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { AuthContext } from './AuthContext';
-import * as api from './api/index';
 import { useDispatch } from 'react-redux';
 import { setUser, clearUser } from '@/stores/user';
 
 const AuthProvider = ({ children }) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [authState, setAuthState] = useState({});
-  const [isError, setIsError] = useState(false);
-
-  const isUserAuthenticated = () =>
-    authState && Object.keys(authState)?.length > 0 ? true : false;
-
+  const isUserAuthenticated = () => {
+    const cachedUser = localStorage.getItem('cachedUser');
+    return cachedUser;
+  }
   const login = (user) => {
     if (user) {
       dispatch(setUser(user));
-      setAuthState(user);
-      setIsError(!isUserAuthenticated());
+      localStorage.setItem('cachedUser', JSON.stringify(user));
     } else {
-      dispatch(clearUser())
+      dispatch(clearUser());
+      localStorage.removeItem('cachedUser');
       return;
     }
   };
 
   const logout = () => {
-    setAuthState({});
-    setIsError(false);
+    dispatch(clearUser());
+    localStorage.removeItem('cachedUser');
   };
 
   return (
     <AuthContext.Provider
       value={{
-        authState,
         isUserAuthenticated,
         login,
         logout,
-        isError,
       }}
     >
       {children}

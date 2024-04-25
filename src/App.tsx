@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import { setUser } from '@/stores/user';
 import Protected from "@/components/Protected";
 import BlankLayout from '@/layouts/BlankLayout';
 import HeaderLayout from '@/layouts/HeaderLayout';

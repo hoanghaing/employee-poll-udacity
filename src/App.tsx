@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
+import { setUser } from '@/stores/user';
 import Protected from "@/components/Protected";
 import BlankLayout from '@/layouts/BlankLayout';
 import HeaderLayout from '@/layouts/HeaderLayout';
@@ -11,10 +13,15 @@ import NewPoll from '@/pages/NewPoll/NewPoll';
 import PollDetail from '@/pages/PollDetail/PollDetail';
 import NotFound from '@/pages/NotFound/NotFound';
 const App = () => {
+  const dispatch = useDispatch();
   const [user, setCurrentUser] = useState(() => {
     const storedUser = localStorage.getItem('cachedUser');
     return storedUser ? JSON.parse(storedUser) : { avatarURL: "", id: "", name: "" };
   });
+  useEffect(() => {
+    localStorage.setItem('cachedUser', JSON.stringify(user));
+    dispatch(setUser(user))
+  }, [user]);
   return (
     <Routes>
       <Route path="/"

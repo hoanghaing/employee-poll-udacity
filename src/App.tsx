@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
 import { setUser } from '@/stores/user';
+import Protected from "@/components/Protected";
 import BlankLayout from '@/layouts/BlankLayout';
 import HeaderLayout from '@/layouts/HeaderLayout';
 import DashBoard from '@/pages/DashBoard/DashBoard';
@@ -12,91 +12,76 @@ import NewPoll from '@/pages/NewPoll/NewPoll';
 import PollDetail from '@/pages/PollDetail/PollDetail';
 import NotFound from '@/pages/NotFound/NotFound';
 const App = () => {
-  const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch();
   const [user, setCurrentUser] = useState(() => {
     const storedUser = localStorage.getItem('cachedUser');
     return storedUser ? JSON.parse(storedUser) : { avatarURL: "", id: "", name: "" };
   });
-  useEffect(() => {
-    localStorage.setItem('cachedUser', JSON.stringify(user));
-    dispatch(setUser(user))
-  }, [user]);
-  const authenticatedHandling = () => {
-    setLoading(false);
-    const loggedUser = localStorage.getItem("authenticated");
-    if (!loggedUser) {
-      const isInLoginRoute = window.location.href.includes('/login');
-      if (isInLoginRoute) return;
-      else {
-        window.location.href = '/login';
-      }
-    }
-  }
-  useEffect(() => {
-    setTimeout(() => {
-      authenticatedHandling();
-    }, 1000);
-  }, []);
-
-  if (loading) {
-    return <span className="absolute top-1/2 left-1/2 loading loading-dots loading-lg"></span>;
-  }
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/"
-          element={
+    <Routes>
+      <Route path="/"
+        element={
+          <Protected>
             <HeaderLayout>
               <DashBoard />
             </HeaderLayout>
-          }
-        >
-        </Route>
-        <Route path="/home"
-          element={
+          </Protected>
+        }
+      >
+      </Route>
+      <Route path="/home"
+        element={
+          <Protected>
             <HeaderLayout>
               <DashBoard />
             </HeaderLayout>
-          }
-        >
-        </Route>
-        <Route path="/leaderboard"
-          element={
+          </Protected>
+        }
+      >
+      </Route>
+      <Route path="/leaderboard"
+        element={
+          <Protected>
             <HeaderLayout>
               <Leaderboard />
             </HeaderLayout>
-          }
-        >
-        </Route>
-        <Route path="/new"
-          element={
+          </Protected>
+        }
+      >
+      </Route>
+      <Route path="/new"
+        element={
+          <Protected>
             <HeaderLayout>
               <NewPoll />
             </HeaderLayout>
-          }
-        >
-        </Route>
-        <Route path="questions/:question_id" element={<HeaderLayout>
-          <PollDetail />
-        </HeaderLayout>} />
-        <Route element={<BlankLayout><NotFound /></BlankLayout>}></Route>
-        <Route path="/login"
-          element={
-            <BlankLayout>
-              <Login />
-            </BlankLayout>
-          }
-        ></Route>
-        <Route path="/notfound"
-          element={
-            <BlankLayout>
-              <NotFound />
-            </BlankLayout>
-          }
-        ></Route>
-      </Routes>
-    </BrowserRouter>
+          </Protected>
+        }
+      >
+      </Route>
+      <Route
+        path="questions/:question_id"
+        element={
+          <Protected>
+            <HeaderLayout>
+              <PollDetail />
+            </HeaderLayout>
+          </Protected>
+        } />
+      <Route path="/login"
+        element={
+          <BlankLayout>
+            <Login />
+          </BlankLayout>
+        }
+      ></Route>
+      <Route path="/notfound"
+        element={
+          <HeaderLayout>
+            <NotFound />
+          </HeaderLayout>
+        }
+      ></Route>
+    </Routes>
   )
 }
 

@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './Login.scss';
 import * as api from '@/api/index';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { AuthContext } from "@/AuthContext";
 
 import { useDispatch } from 'react-redux';
 import { setUser, clearUser } from '@/stores/user';
 
 const Login = () => {
+  const authContext = useContext(AuthContext);
+  const { state } = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -28,10 +31,8 @@ const Login = () => {
     const result = api.validateUser(payload);
     if (result.success) {
       const { user } = result
-      dispatch(setUser(user));
-      localStorage.setItem('cachedUser', JSON.stringify(user));
-      localStorage.setItem("authenticated", payload.id);
-      return navigate("/");
+      authContext.login(user);
+      return navigate(state?.path || "/");
     } else {
       dispatch(clearUser())
       return;

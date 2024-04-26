@@ -20,7 +20,7 @@ const DashBoard = () => {
       <input
         type="checkbox"
         className="setting-panel-toggle toggle toggle-success"
-        checked={toggleDone}
+        defaultChecked={toggleDone}
         onClick={handleToggleClicked}
       />
       {

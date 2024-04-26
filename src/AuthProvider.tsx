@@ -23,6 +23,7 @@ const AuthProvider = ({ children }) => {
   const logout = () => {
     dispatch(clearUser());
     localStorage.removeItem('cachedUser');
+    return;
   };
 
   return (

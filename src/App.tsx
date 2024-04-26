@@ -14,14 +14,15 @@ import PollDetail from '@/pages/PollDetail/PollDetail';
 import NotFound from '@/pages/NotFound/NotFound';
 const App = () => {
   const dispatch = useDispatch();
-  const [user, setCurrentUser] = useState(() => {
-    const storedUser = localStorage.getItem('cachedUser');
-    return storedUser ? JSON.parse(storedUser) : { avatarURL: "", id: "", name: "" };
-  });
   useEffect(() => {
-    localStorage.setItem('cachedUser', JSON.stringify(user));
-    dispatch(setUser(user))
-  }, [user]);
+    const userData = localStorage.getItem('cachedUser') || null;
+    if (userData) {
+      // @ts-ignore
+      const user = JSON.parse(userData) || {};
+      dispatch(setUser(user));
+    }
+
+  }, []);
   return (
     <Routes>
       <Route path="/"
@@ -82,9 +83,11 @@ const App = () => {
       ></Route>
       <Route path="/notfound"
         element={
-          <HeaderLayout>
-            <NotFound />
-          </HeaderLayout>
+          <Protected>
+            <HeaderLayout>
+              <NotFound />
+            </HeaderLayout>
+          </Protected>
         }
       ></Route>
     </Routes>

@@ -8,10 +8,14 @@ import { BrowserRouter } from 'react-router-dom';
 // Create a mock Redux store
 const mockStore = configureStore([]);
 const store = mockStore({
-  // Mock your Redux state here if needed
+  user: {
+    id: '',
+    name: '',
+    avatarURL: ''
+  }
 });
 
-test('renders login form correctly', async () => {
+test('Snapshot: renders login form correctly', async () => {
   const { container } = render(
     <Provider store={store}>
       <BrowserRouter>

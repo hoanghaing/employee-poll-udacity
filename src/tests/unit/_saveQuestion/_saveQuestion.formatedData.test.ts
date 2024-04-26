@@ -1,9 +1,8 @@
 import { _saveQuestion } from '@/api/index';
 import {expect, describe, it, test } from 'vitest';
 
-describe('_saveQuestion function', () => {
+describe('_saveQuestion function: happy case', () => {
   it('should save the question and return the formatted question object', async () => {
-    // Define a mock question object to save
     const mockQuestion = {
       optionOneText: 'Option One Text',
       optionTwoText: 'Option Two Text',

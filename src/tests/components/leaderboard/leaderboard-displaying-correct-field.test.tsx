@@ -17,7 +17,7 @@ const store = mockStore({
   // Mock your Redux state here if needed
 });
 
-test('renders login form correctly', async () => {
+test('Snapshot: renders leaderboard', async () => {
   const { debug, container } = render(
     <Provider store={store}>
       <BrowserRouter>

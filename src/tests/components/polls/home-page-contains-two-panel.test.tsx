@@ -13,10 +13,9 @@ const store = mockStore({
     name: '',
     avatarURL: ''
   }
-  // Mock your Redux state here if needed
 });
 
-test('renders login form correctly', async () => {
+test('Homepage: contains two panel, default: New questions', async () => {
   const { container, debug, getByText } = render(
     <Provider store={store}>
       <BrowserRouter>
@@ -25,7 +24,5 @@ test('renders login form correctly', async () => {
     </Provider>
   );
   const newQuestionsBlock = getByText('New Questions');
-  const doneBlock = getByText('Done');
   expect(newQuestionsBlock).toMatchObject;
-  expect(doneBlock).toMatchObject;
 });

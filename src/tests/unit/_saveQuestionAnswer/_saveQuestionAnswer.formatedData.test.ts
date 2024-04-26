@@ -1,6 +1,6 @@
 import { _saveQuestionAnswer } from '@/api/index';
 import {expect, describe, it, test } from 'vitest';
-describe('_saveQuestionAnswer', () => {
+describe('_saveQuestionAnswer: happy case', () => {
   it('should return true when correctly formatted data is passed to the function', async () => {
 
     const authedUser = 'sarahedo';

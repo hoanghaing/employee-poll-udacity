@@ -1,5 +1,63 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Snapshot: navigation bar 1`] = `
+<div>
+  <header>
+    <div
+      class="tabs"
+      role="tablist"
+    >
+      <span
+        class="tab"
+        role="tab"
+      >
+        <a
+          href="/home"
+        >
+          Home
+        </a>
+      </span>
+      <span
+        class="tab"
+        role="tab"
+      >
+        <a
+          href="/leaderboard"
+        >
+          Leaderboard
+        </a>
+      </span>
+      <span
+        class="tab"
+        role="tab"
+      >
+        <a
+          href="/new"
+        >
+          New
+        </a>
+      </span>
+      <div
+        class="log-out"
+      >
+        Logout
+      </div>
+      <div
+        class="user"
+      >
+        <img
+          class="avt"
+          src="../src/"
+        />
+        <span
+          class="name"
+        />
+      </div>
+    </div>
+  </header>
+</div>
+`;
+
 exports[`renders login form correctly 1`] = `
 <div>
   <header>

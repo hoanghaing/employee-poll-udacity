@@ -1,12 +1,13 @@
 import { _saveQuestion } from '@/api/index';
 import {expect, describe, it, test } from 'vitest';
 
-describe('_saveQuestion function', () => {
+describe('_saveQuestion function: error, invalid case', () => {
   test('should reject with an error if incorrect data is passed', async () => {
     // Arrange
     const invalidQuestion = {
-      // Missing required fields
-      // For example, optionOneText, optionTwoText, and author
+      optionOneText: null,
+      optionTwoText: null,
+      author: 'shushu',
     };
 
     // Act
@@ -16,6 +17,7 @@ describe('_saveQuestion function', () => {
       // If the function does not throw an error, fail the test
       expect(true).toBe(false);
     } catch (error) {
+      // console.log('error: ', error);
       // Assert
       expect(error).toBeTruthy();
     }

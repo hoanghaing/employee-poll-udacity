@@ -5,16 +5,29 @@ import * as api from '@/api/index';
 import './DashBoard.scss';
 const DashBoard = () => {
   const [doneQues, setDoneQues] = useState([]);
-  const [newQues, setNewQues] = useState([])
+  const [newQues, setNewQues] = useState([]);
+  const [toggleDone, setToggleDone] = useState(false);
   useEffect(() => {
     const { doneQuestions = [], newQuestions = [] } = api.getQuestionLists('hainh');
     setDoneQues(doneQuestions)
     setNewQues(newQuestions)
-  }, [])
+  }, []);
+  const handleToggleClicked = () => {
+    setToggleDone(!toggleDone);
+  };
   return (
     <div className="container">
-      <Panel title="New Questions" questions={newQues} />
-      <Panel title="Done" questions={doneQues} />
+      <input
+        type="checkbox"
+        className="setting-panel-toggle toggle toggle-success"
+        checked={toggleDone}
+        onClick={handleToggleClicked}
+      />
+      {
+        !toggleDone ? 
+          <Panel title="New Questions" questions={newQues} /> 
+          : <Panel title="Done" questions={doneQues} />
+      }
     </div>
   );
 }

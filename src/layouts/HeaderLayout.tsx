@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './HeaderLayout.scss';
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { clearUser } from '@/stores/user';
+import { AuthContext } from "@/AuthContext";
 
 const HeaderLayout = ({ children }) => {
+  const authContext = useContext(AuthContext);
   const dispatch = useDispatch();
   const currentUser = useSelector((state: any) => {
     return state.user
   });
   const navigate = useNavigate();
   const onClickLogout = () => {
-    localStorage.removeItem("authenticated");
-    localStorage.removeItem("cachedUser");
-    dispatch(clearUser())
+    authContext.logout();
     return navigate("/login");
   }
   return (

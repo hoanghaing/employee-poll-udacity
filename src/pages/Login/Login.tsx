@@ -30,7 +30,7 @@ const Login = () => {
     }
     const result = api.validateUser(payload);
     if (result.success) {
-      const { user } = result
+      const { user } = result;
       authContext.login(user);
       return navigate(state?.path || "/");
     } else {

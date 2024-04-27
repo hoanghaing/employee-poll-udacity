@@ -14,15 +14,6 @@ import PollDetail from '@/pages/PollDetail/PollDetail';
 import NotFound from '@/pages/NotFound/NotFound';
 const App = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    const userData = localStorage.getItem('cachedUser') || null;
-    if (userData) {
-      // @ts-ignore
-      const user = JSON.parse(userData) || {};
-      dispatch(setUser(user));
-    }
-
-  }, []);
   return (
     <Routes>
       <Route path="/"

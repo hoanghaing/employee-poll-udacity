@@ -7,7 +7,7 @@ import './DashBoard.scss';
 const DashBoard = () => {
   const [doneQues, setDoneQues] = useState([]);
   const [newQues, setNewQues] = useState([]);
-  const [toggleDone, setToggleDone] = useState(true);
+  const [toggleDone, setToggleDone] = useState(false);
   const userId = useSelector((state: any) => {
     return state.user.id
   });

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import Panel from '@/components/Panel';
 import * as api from '@/api/index';
@@ -7,8 +8,11 @@ const DashBoard = () => {
   const [doneQues, setDoneQues] = useState([]);
   const [newQues, setNewQues] = useState([]);
   const [toggleDone, setToggleDone] = useState(false);
+  const userId = useSelector((state: any) => {
+    return state.user.id
+  });
   useEffect(() => {
-    const { doneQuestions = [], newQuestions = [] } = api.getQuestionLists('hainh');
+    const { doneQuestions = [], newQuestions = [] } = api.getQuestionLists(userId);
     setDoneQues(doneQuestions)
     setNewQues(newQuestions)
   }, []);

@@ -28,6 +28,13 @@ const PollDetail = () => {
       navigate('/notfound');
     }
   }, [question_id]);
+  const handleVoted = (qid) => {
+    const result = api.getQuestionDetail(qid, userId);
+    const { answered, author, options } = result;
+    setAuthor(author);
+    setIsAnswered(answered);
+    setOptions(options);
+  }
   return (
     <div className='poll-container'>
       < div className='poll-author' >
@@ -53,7 +60,7 @@ const PollDetail = () => {
               (
                 <div className='poll-content--options'>
                   {options.map((item, index) => (
-                    <UnAnsweredQuestion key={index} option={item} question_id={question_id} />
+                    <UnAnsweredQuestion key={index} option={item} question_id={question_id} handleVoted={handleVoted} />
                   ))}
                 </div>
               )

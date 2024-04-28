@@ -3,7 +3,7 @@ import './UnAnsweredQuestion.scss';
 import * as api from '@/api/index';
 import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-const UnAnsweredQuestion = ({ option, question_id }) => {
+const UnAnsweredQuestion = ({ option, question_id, handleVoted }) => {
   const navigate = useNavigate();
   const userId = useSelector((state: any) => {
     return state.user.id
@@ -16,7 +16,7 @@ const UnAnsweredQuestion = ({ option, question_id }) => {
     }
     const res = await api._saveQuestionAnswer(payload);
     if (res) {
-      navigate('/home');
+      handleVoted(question_id);
     }
   }
   return (
